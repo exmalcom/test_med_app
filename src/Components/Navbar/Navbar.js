@@ -1,11 +1,28 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link, useNavigate } from 'react-router-dom'; // Import Link from react-router-dom
 import './Navbar.css';
 
-const Navbar = () => {
+const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
+  const navigate = useNavigate();  // Hook to programmatically navigate
+  const email = sessionStorage.getItem('email'); // Retrieve email from sessionStorage
+  const username = email ? email.split('@')[0] : ''; // Extract username from email
+
   const handleClick = () => {
     // Define your click handling logic here (e.g., toggle mobile menu)
     console.log('Navigation icon clicked');
+  };
+
+  const handleLogout = () => {
+    // Confirmation alert before logging out
+    const confirmLogout = window.confirm("Are you sure you want to log out?");
+    if (confirmLogout) {
+        sessionStorage.removeItem("auth-token"); // Clear auth token from session storage
+        localStorage.removeItem("user-info"); // Clear user data from local storage
+        setIsLoggedIn(false); // Update the logged-in state
+        sessionStorage.removeItem('email'); // Clear email from session storage
+        navigate("/"); // Redirect to the home page
+        window.location.reload(); // Refresh the page after logout
+    }
   };
 
   return (
@@ -44,7 +61,7 @@ const Navbar = () => {
         <ul className="nav__links active">
           {/* List item for the 'Home' link */}
           <li className="link">
-            <Link to="/Landing_Page">Home</Link>
+            <Link to="/">Home</Link>
           </li>
           {/* List item for the 'Appointments' link */}
           <li className="link">
@@ -52,16 +69,26 @@ const Navbar = () => {
           </li>
           {/* List item for the 'Sign Up' link with a button */}
           <li className="link">
-            <Link to="/Sign_Up">
-              <button className="btn1">Sign Up</button>
-            </Link>
+            {isLoggedIn ? (
+              <div className='user-info'>
+                {/* Display username before Logout */}
+                <span className="username">{username}</span>
+                <button className="btn1" onClick={handleLogout}>Logout</button> {/* Logout button for logged in users */}
+              </div>
+            ) : (
+              <Link to="/signup">
+              <button className="btn1">Sign Up</button> {/* Sign up link for new users */}
+              </Link>
+            )}
           </li>
           {/* List item for the 'Login' link with a button */}
-          <li className="link">
-            <Link to="/Login">
-              <button className="btn1">Login</button>
-            </Link>
-          </li>
+          {!isLoggedIn && (
+            <li className="link">
+                <Link to="/login">
+                <button className="btn1" onClick={() => navigate("/login")}>Login</button>
+                </Link>
+            </li>
+          )}
         </ul>
       </nav>
     </div>

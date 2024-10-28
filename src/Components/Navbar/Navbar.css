@@ -3,6 +3,15 @@
  * Styling for the Header Navbar
  */
 
+/* Style for the user info container */
+.user-info {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    gap: 0.5rem; /* Space between username and button */
+}
+
+
+
 /* Styling for the main navigation bar */
 nav {
     padding: 1.5rem;
