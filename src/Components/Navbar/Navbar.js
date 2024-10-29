@@ -64,7 +64,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
             <Link to="/">Home</Link>
           </li>
           <li className='link'>
-            <Link to="/instant-consultation">Book Consultation</Link>
+            <Link to="/consultation">Book Consultation</Link>
           </li>
           {/* List item for the 'Appointments' link */}
           <li className="link">

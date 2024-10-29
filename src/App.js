@@ -7,8 +7,7 @@ import Navbar from './Components/Navbar/Navbar';
 import LandingPage from './Components/Landing_Page/LandingPage';
 import Login from './Components/Login/Login';
 import SignUp from './Components/Sign_Up/Sign_Up';
-import AppointmentForm from './Components/AppointmentForm/AppointmentForm';
-import InstantConsultation from './Components/InstantConsultation';
+import Consultation from './Components/BookingConsultation';
 
 // Function component for the main App
 function App() {
@@ -40,8 +39,7 @@ function App() {
             <Route path="/" element={<LandingPage/>}/>
             <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
             <Route path="/signup" element={<SignUp/>}/>
-            <Route path="/appointments" element={<AppointmentForm/>}/>
-            <Route path="/instant-consultation" element={<InstantConsultation/>}/>
+            <Route path="/consultation" element={<Consultation/>}/>
           </Routes>
         </BrowserRouter>
     </div>
