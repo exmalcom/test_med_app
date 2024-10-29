@@ -1,0 +1,19 @@
+/* src/components/ReportsLayout/ReportsLayout.css */
+.reports-layout {
+    padding: 20px;
+}
+
+.reports-layout table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.reports-layout th, .reports-layout td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.reports-layout th {
+    background-color: #f2f2f2;
+}

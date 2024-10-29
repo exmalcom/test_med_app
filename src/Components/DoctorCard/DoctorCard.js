@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import './DoctorCard.css';
@@ -6,13 +6,9 @@ import AppointmentFormIC from '../AppointmentForm/AppointmentForm';
 import { v4 as uuidv4 } from 'uuid';
 
 
-const DoctorCard = ({ name, speciality, experience, ratings, profilePic }) => {
+const DoctorCard = ({ name, speciality, experience, ratings, profilePic, onBookAppointment }) => {    // Accepting the prop
   const [showModal, setShowModal] = useState(false);
   const [appointments, setAppointments] = useState([]);
-
-  const handleBooking = () => {
-    setShowModal(true);
-  };
 
   const handleCancel = (appointmentId) => {
     const updatedAppointments = appointments.filter((appointment) => appointment.id !== appointmentId);
@@ -27,17 +23,9 @@ const DoctorCard = ({ name, speciality, experience, ratings, profilePic }) => {
     const updatedAppointments = [...appointments, newAppointment];
     setAppointments(updatedAppointments);
     setShowModal(false);
-  };
 
-  // Function to get the image based on the doctor's name
-  const getProfileImage = (name) => {
-    const images = {
-      'Dr. Jiao Yang': '../images/naruto.jpg', // Replace with actual doctor name and image
-      'Dr. Jane Smith': '/images/sasuke.jpg', // Replace with actual doctor name and image
-      'Dr. Emily Clark': '/images/sakura.jpg', // Replace with actual doctor name and image
-      // Add more mappings as needed
-    };
-    return images[name] || '/images/default.jpg'; // Default image if no match found
+    // Call the onBookAppointment prop to notify the parent component
+    onBookAppointment(newAppointment); // Pass the new appointment data
   };
 
   return (

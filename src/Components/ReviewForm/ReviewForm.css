@@ -1,0 +1,103 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.reviews-container {
+    width: 75%; /* Set the width of the "Reviews" section to 75% */
+    margin: 0 auto; /* Center the reviews section */
+}
+
+table {
+    width: 100%; /* Ensure the table takes full width of its container */
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #dddddd;
+    box-sizing: border-box;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.review-form-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+    margin: 20px auto; /* Center the "Give a review" section */
+}
+
+.review-form-container h2 {
+    margin: 0 0 20px;
+    font-size: 24px;
+    color: #000000;
+}
+
+.review-form-container label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.review-form-container input[type="text"],
+.review-form-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.review-form-container textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+.review-form-container button[type="submit"] {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.review-form-container button[type="submit"]:hover {
+    background-color: #0056b3;
+}

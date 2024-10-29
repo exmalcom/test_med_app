@@ -6,11 +6,14 @@
 /* Style for the user info container */
 .user-info {
     display: flex;
-    align-items: center; /* Align items vertically */
-    gap: 0.5rem; /* Space between username and button */
+    align-items: center;
+    gap: 0.5rem;
+    position: relative; /* Set relative positioning for the dropdown */
 }
 
+
 .welcome-message {
+    position: relative;
     font-size: 1rem;
     font-weight: bold;
     margin-right: 0.5rem; /* Add some space between "Welcome" and the username */
@@ -19,6 +22,45 @@
 .username {
     font-size: 1rem;
     font-weight: bold;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Container for the dropdown */
+.dropdown-container {
+    position: relative; /* Ensure the dropdown is positioned relative to the user-info */
+}
+
+/* Adjust the dropdown menu position */
+/* Dropdown menu styles */
+.dropdown-menu {
+    position: absolute; /* Keep it absolute */
+    bottom: -120px;
+    left: -230px; /* Align it to the left of the dropdown container */
+    z-index: 1;
+    display: none; /* Set display to none initially */
+    min-width: 120px;
+    padding: 8px 0;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+/* Show the dropdown menu when open */
+/* Show the dropdown menu when open */
+.dropdown-menu.show {
+    display: block; /* Show dropdown when 'show' class is applied */
+}
+
+/* Optional: Add some margin to the dropdown for better spacing */
+.dropdown-menu li {
+    padding: 0.5rem 1rem;
+}
+
+/* Optional: Add hover effects */
+.dropdown-menu li:hover {
+    background-color: #f0f0f0; /* Change background color on hover */
 }
 
 
@@ -36,48 +78,11 @@ nav {
     background-color: #fff;
 }
 
-/* Styling for the dropdown menu */
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 1;
-    display: none;
-    min-width: 120px;
-    padding: 8px 0;
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-}
 
 /* Styling for the user welcome message */
 .welcome-user {
     position: relative;
     cursor: pointer;
-}
-
-/* Display dropdown menu on hover */
-.welcome-user:hover .dropdown-menu {
-    display: block;
-}
-
-/* Styling for the items in the dropdown menu */
-.dropdown-menu li {
-    display: block;
-    width: 150px;
-    padding:5px;
-}
-
-/* Styling for links in the dropdown menu */
-.dropdown-menu li a {
-    color: #333;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-/* Hover effect for links in the dropdown menu */
-.dropdown-menu li a:hover {
-    color: #2190ff;
 }
 
 /* Styling for the logo in the navbar */

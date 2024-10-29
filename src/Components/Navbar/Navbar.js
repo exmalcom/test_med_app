@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; // Import Link from react-router-dom
 import './Navbar.css';
 
@@ -6,6 +6,28 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();  // Hook to programmatically navigate
   const email = sessionStorage.getItem('email'); // Retrieve email from sessionStorage
   const username = email ? email.split('@')[0] : ''; // Extract username from email
+
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdownOpen((prevOpen) => !prevOpen);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+        const dropdown = document.querySelector('.dropdown-container');
+        if (dropdown && !dropdown.contains(event.target)) {
+            setDropdownOpen(false);
+        }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+
 
   const handleClick = () => {
     // Define your click handling logic here (e.g., toggle mobile menu)
@@ -76,8 +98,16 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
               <div className='user-info'>
                 {/* Display username before Logout */}
                 <span class="welcome-message">Welcome,</span>
-                <span className="username">{username}</span>
+                <span className="username" onClick={toggleDropdown}>{username}</span>
+                
                 <button className="btn1" onClick={handleLogout}>Logout</button> {/* Logout button for logged in users */}
+                
+                <div className={"dropdown-container"}>
+                  <ul className={`dropdown-menu ${dropdownOpen ? 'show' : ''}`}>
+                    <li><Link to="/profile">Profile</Link></li>
+                    <li><Link to="/reports">Reports</Link></li>
+                  </ul>
+                </div>
               </div>
             ) : (
               <Link to="/signup">
