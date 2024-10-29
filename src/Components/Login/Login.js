@@ -11,6 +11,7 @@ const Login = ({ setIsLoggedIn }) => {
   // State variables for email and password
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState('');
+  const [errorMessage, setErrorMessage] = useState(''); // State for error messages
 
   // Get navigation function from react-router-dom
   const navigate = useNavigate();
@@ -25,6 +26,17 @@ const Login = ({ setIsLoggedIn }) => {
   // Function to handle login form submission
   const login = async (e) => {
     e.preventDefault();
+
+    // Client-side validation
+    if (!email || !password) {
+        setErrorMessage("Email and password are required.");
+        return;
+    }
+
+    // Clear any previous error messages
+    setErrorMessage('');
+
+
     // Send a POST request to the login API endpoint
     const res = await fetch(`${API_URL}/api/auth/login`, {
       method: "POST",
@@ -36,14 +48,13 @@ const Login = ({ setIsLoggedIn }) => {
 
     // Parse the response JSON
     const json = await res.json();
+
     if (json.authtoken) {
       // If authentication token is received, store it in session storage
       sessionStorage.setItem('auth-token', json.authtoken);
       sessionStorage.setItem('email', email); // Store email in sessionStorage
       setIsLoggedIn(true); // Update login state 
-      navigate('/');
-      window.location.reload();
-
+      
       // Redirect to home page and reload the window
       navigate('/');
       window.location.reload();
@@ -52,9 +63,24 @@ const Login = ({ setIsLoggedIn }) => {
       if (json.errors) {
         json.errors.forEach((error) => alert(error.msg));
       } else {
-        alert(json.error);
+        // Set error message based on the server response
+        // Here you can customize the error message based on the response
+        // Handle errors if authentication fails
+        if (json.error) {
+            //setErrorMessage(json.error); // Use the error message from the server
+            setErrorMessage("Login failed, Check your Email address and Password."); // Use a generic error message
+        } else {
+            setErrorMessage(json.error || "Login failed. Please try again.");
+        }
       }
     }
+  };
+
+  // Function to handle form reset
+  const handleReset = () => {
+    setEmail('');
+    setPassword('');
+    setErrorMessage('');
   };
 
   return (
@@ -74,6 +100,8 @@ const Login = ({ setIsLoggedIn }) => {
                 {/* Div for login form */}
                 <div className="login-form">
                     <form onSubmit={login}>
+                        
+
                         {/* Form group for email input */}
                         <div className="form-group">
                             <label htmlFor="email">Email</label>
@@ -101,11 +129,13 @@ const Login = ({ setIsLoggedIn }) => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
+                            {/* Display error message if there is one */}
+                            {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
                         </div>
                         {/* Button group for login and reset buttons */}
                         <div className="btn-group">
                             <button type="submit" className="btn btn-primary mb-2 mr-1 waves-effect waves-light">Login</button>
-                            <button type="reset" className="btn btn-danger mb-2 waves-effect waves-light">Reset</button>
+                            <button type="reset" className="btn btn-danger mb-2 waves-effect waves-light" onClick={handleReset}>Reset</button>
                         </div>
                         <br />
                         {/* Additional login text for 'Forgot Password' option */}
