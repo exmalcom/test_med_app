@@ -25,7 +25,10 @@ const Landing_Page = () => {
                   <div class="blue1 blob"></div> {/* Creating a different blue blob inside the second 'blob-cont' div */}
               </div>
             <h4>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque at quae ducimus. Suscipit omnis quibusdam non cum rem voluptatem!
+              <p>
+                We are a team of medical professionals dedicated to providing the best medical care to our patients. Our online medical service booking platform allows you to book appointments with doctors and medical professionals from the comfort of your home or office. No need to wait in line or worry about finding a parking spot.
+              </p>
+
             </h4>
             <Link to="/consultation"> {/* Creating a hyperlink to jump to the 'services' section */}
               <button class="button">Get Started</button> {/* Creating a button with class name 'button' */}

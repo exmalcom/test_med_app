@@ -9,7 +9,6 @@ import Login from './Components/Login/Login';
 import SignUp from './Components/Sign_Up/Sign_Up';
 import Consultation from './Components/BookingConsultation';
 import Notification from './Components/Notification/Notification';
-import InstantConsultation from './Components/InstantConsultationBooking/InstantConsultation';
 import ReviewForm from './Components/ReviewForm/ReviewForm';
 import ProfileCard from './Components/ProfileCard/ProfileCard';
 import ReportsLayout from './Components/ReportsLayout/ReportsLayout';
@@ -90,7 +89,6 @@ function App() {
                     <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/consultation" element={<Consultation onBookAppointment={handleBookAppointment} />} />
-                    <Route path="/instant-consultation" element={<InstantConsultation />} />
                     <Route path="/profile" element={<ProfileCard userDetails={userDetails} appointmentData={appointmentData}/>} />
                     <Route path="/reports" element={<ReportsLayout />} />
                 </Routes>
