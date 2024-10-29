@@ -6,6 +6,7 @@ frontend_capstone_starter_code
 
 cd test_med_app
 npm install
+npm install react-router-dom
 npm start
 
 cd test_med_app/server
