@@ -7,7 +7,8 @@ import Navbar from './Components/Navbar/Navbar';
 import LandingPage from './Components/Landing_Page/LandingPage';
 import Login from './Components/Login/Login';
 import SignUp from './Components/Sign_Up/Sign_Up';
-import InstantConsultation from './Components/InstantConsultationBooking/InstantConsultation';
+import AppointmentForm from './Components/AppointmentForm/AppointmentForm';
+import InstantConsultation from './Components/InstantConsultation';
 
 // Function component for the main App
 function App() {
@@ -37,9 +38,10 @@ function App() {
           <Routes>
             {/* Define individual Route components for different pages */}
             <Route path="/" element={<LandingPage/>}/>
-            <Route path="/instant-consultation" element={<InstantConsultation/>}/>
             <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
             <Route path="/signup" element={<SignUp/>}/>
+            <Route path="/appointments" element={<AppointmentForm/>}/>
+            <Route path="/instant-consultation" element={<InstantConsultation/>}/>
           </Routes>
         </BrowserRouter>
     </div>
