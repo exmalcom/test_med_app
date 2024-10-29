@@ -10,6 +10,16 @@
     gap: 0.5rem; /* Space between username and button */
 }
 
+.welcome-message {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-right: 0.5rem; /* Add some space between "Welcome" and the username */
+}
+
+.username {
+    font-size: 1rem;
+    font-weight: bold;
+}
 
 
 /* Styling for the main navigation bar */

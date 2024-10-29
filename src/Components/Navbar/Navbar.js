@@ -63,6 +63,9 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
           <li className="link">
             <Link to="/">Home</Link>
           </li>
+          <li className='link'>
+            <Link to="/instant-consultation">Book Consultation</Link>
+          </li>
           {/* List item for the 'Appointments' link */}
           <li className="link">
             <Link to="/appointments">Appointments</Link>
@@ -72,6 +75,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
             {isLoggedIn ? (
               <div className='user-info'>
                 {/* Display username before Logout */}
+                <span class="welcome-message">Welcome,</span>
                 <span className="username">{username}</span>
                 <button className="btn1" onClick={handleLogout}>Logout</button> {/* Logout button for logged in users */}
               </div>
