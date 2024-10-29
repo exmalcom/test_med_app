@@ -11,12 +11,46 @@ const Sign_Up = () => {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
-    const [showerr, setShowerr] = useState(''); // State to show error messages
+    const [showerr, setShowerr] = useState(''); // State to show error messages/ For server response errors
     const navigate = useNavigate(); // Navigation hook from react-router
+    const [errors, setErrors] = useState({}); // For front-end validation errors
+
+    const validate = () => {
+        let validationErrors = {};
+        let isValid = true;
+
+        if (!name.trim()) {
+            validationErrors.name = "Name is required";
+            isValid = false;
+        }
+
+        const phonePattern = /^[0-9]{10}$/;
+        if (!phone.match(phonePattern)) {
+            validationErrors.phone = "Phone number must be 10 digits";
+            isValid = false;
+        }
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email.match(emailPattern)) {
+            validationErrors.email = "Please enter a valid email";
+            isValid = false;
+        }
+
+        if (password.length < 8) {
+            validationErrors.password = "Password must be at least 8 characters";
+            isValid = false;
+        }
+
+        setErrors(validationErrors);
+        return isValid;
+    };
+
 
     // Function to handle form submission
     const register = async (e) => {
         e.preventDefault(); // Prevent default form submission
+
+        if (!validate()) return; // Prevent API call if validation fails
 
         // API Call to register user
         const response = await fetch(`${API_URL}/api/auth/register`, {
@@ -50,12 +84,25 @@ const Sign_Up = () => {
             window.location.reload(); // Refresh the page
         } else {
             if (json.errors) {
-                json.errors.forEach(error => setShowerr(error.msg)); // Show error messages
+                setShowerr(json.errors.map(error => error.msg).join(', ')); // Show error messages
             } else {
                 setShowerr(json.error);
             }
         }
     };
+
+
+    const handleReset = () => {
+        setName('');
+        setEmail('');
+        setPhone('');
+        setPassword('');
+        setShowerr('');
+        setErrors({});
+    };
+    
+    // In the button:
+    <button type="reset" className="btn btn-danger mb-2 waves-effect waves-light" onClick={handleReset}>Reset</button>
 
     // JSX to render the Sign Up form
     return (
@@ -85,6 +132,7 @@ const Sign_Up = () => {
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                             /> {/* Text input field for name */}
+                            {errors.name && <div className="error-message">{errors.name}</div>}
                         </div>
 
                         <div className="form-group"> {/* Form group for user's phone number */}
@@ -100,6 +148,7 @@ const Sign_Up = () => {
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
                             /> {/* Tel input field for phone number */}
+                            {errors.phone && <div className="error-message">{errors.phone}</div>}
                         </div>
 
                         <div className="form-group"> {/* Form group for user's email */}
@@ -115,6 +164,7 @@ const Sign_Up = () => {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             /> {/* Email input field */}
+                            {errors.email && <div className="error-message">{errors.email}</div>}
                         </div>
 
                         <div className="form-group"> {/* Form group for user's password */}
@@ -130,11 +180,12 @@ const Sign_Up = () => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             /> {/* Password input field */}
+                            {errors.password && <div className="error-message">{errors.password}</div>}
                         </div>
 
                         <div className="btn-group"> {/* Button group for form submission and reset */}
                             <button type="submit" className="btn btn-primary mb-2 mr-1 waves-effect waves-light">Submit</button> {/* Submit button */}
-                            <button type="reset" className="btn btn-danger mb-2 waves-effect waves-light">Reset</button> {/* Reset button */}
+                            <button type="reset" className="btn btn-danger mb-2 waves-effect waves-light" onClick={handleReset}>Reset</button> {/* Reset button */}
                         </div>
                     </form> {/* End of the form */}
                 </div>
